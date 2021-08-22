@@ -64,6 +64,9 @@ const table = {
   "好奇心からこんにちは": "選択肢は１つですよ？？？？？",
   "なので与える命令を実行しているだけになります": "system",
 
+  "actionと": "2",
+  "moveを": "-2",
+  "Client的な（？）": "0",
 }
 let src = fs.readFileSync("input.txt").toString();
 for (let conf in table) {
