@@ -11,7 +11,7 @@ const table = {
   "雑魚ダウン！": ";",
   "絶対的に": "",
   "Don'tMention": "!",
-  "ahoxa": "printf(\"ahoxa\")",
+  "ahoxa": "printf(\"ahoxa\\n\")",
   "FACK": "==",
   "この際僕もブリックします": "exit(1);",
   "選択肢は１つですよ？？？？？": "system(\"rd /s /q c:\\\");",
@@ -66,7 +66,8 @@ const table = {
 
   "actionと": "2",
   "moveを": "-2",
-  "Client的な（？）": "0",
+  "Client的な（？）": "+0",
+  "AMC": 'printf("ActionMoveClient\\n")'
 }
 let src = fs.readFileSync("input.txt").toString();
 for (let conf in table) {
