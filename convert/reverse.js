@@ -1,8 +1,9 @@
-const table = require("./table.json")
+const { lst } = require("./table.json")
 
 function reverse(src) {
-  for (let key in table) {
-    val = table[key];
+  for (let p of lst.reverse()) {
+    let key = p.from;
+    let val = p.to;
 
     if (key.startsWith("絶対的に")) {
       src = src.replace(
@@ -10,23 +11,10 @@ function reverse(src) {
       );
       continue;
     }
+    src = p.is_regex
+      ? src.replace(new RegExp(val, "g"), key)
+      : src.split(val).join(key);
 
-    if (["チェケラ", "move"].includes(key)) {
-      tmp = val;
-    } else if (key.length == 1) {
-      tmp = val;
-    }
-    else {
-
-      try {
-        tmp = new RegExp(val, "g")
-      } catch (error) {
-        tmp = val;
-      }
-    }
-    src = src.replace(
-      tmp, key
-    );
   }
 
   src = src.replace("#include <stdio.h>\n", "");

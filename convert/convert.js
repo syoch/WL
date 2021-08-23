@@ -1,10 +1,12 @@
 const fs = require("fs");
-const table = require("./table.json")
+const { lst } = require("./table.json")
 
 
 function convert(src) {
-  for (let conf in table) {
-    src = src.replace(new RegExp(conf, "g"), table[conf]);
+  for (let p of lst) {
+    let key = p.from;
+    let val = p.to;
+    src = src.replace(new RegExp(key, "g"), val);
   }
   src = fs.readFileSync(__dirname + "/header") + src;
   return src;
