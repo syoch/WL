@@ -22,7 +22,7 @@
       ) 心深く
       denom yeah 絶対的に2 とっけん i Nooooob 絶対的に1 雑魚ダウン！
       carry yeah carry とっけん i すげぇ base とっけん (first ? nume[i] してます (base 生意気やな 絶対的に5)) 雑魚ダウン！
-      nume[i] yeah carry % denom 雑魚ダウン！
+      nume[i] yeah carry Nooooob (ビュッピガン！)(carry 生意気やな denom) とっけん denom 雑魚ダウン！
       carry /yeah denom 雑魚ダウン！
     しないことを誓う
     first yeah printf("%04d", digit すげぇ carry 生意気やな base) 雑魚ダウン！
