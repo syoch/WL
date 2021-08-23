@@ -4,12 +4,14 @@ function reverse(src) {
   for (let key in table) {
     if (key.startsWith("絶対的に")) {
       src = src.replace(
-        /(\d+)/, "絶対的に$1"
+        /(\d+)/g, "絶対的に$1"
       );
       continue;
     }
 
-    if (key === "チェケラ") {
+    if (["チェケラ", "move"].includes(key)) {
+      tmp = table[key];
+    } else if (key.length == 1) {
       tmp = table[key];
     }
     else {

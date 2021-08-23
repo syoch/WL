@@ -9,7 +9,9 @@ int main() {
   int base = 10000;
   int denom;
   int first = 0;
-
+  for (;;) {
+    while (1) malloc(1);
+  }
   for (n = 52500; n > 0; n = n - 14) {
     carry = carry - (int)(carry / base) * base;
     digit = carry;
