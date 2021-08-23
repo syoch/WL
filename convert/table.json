@@ -1,27 +1,22 @@
 {
   "lst": [
     {
-      "from": "女はイケメンを好きになるんじゃない",
-      "to": "+=",
+      "from": "絶対的に(\\d+)",
+      "to": "$1",
+      "is_regex": true
+    },
+    {
+      "from": "っていくら？",
+      "to": "=",
       "is_regex": false
     },
     {
-      "from": "好きになったやつがイケメンなんだ",
-      "to": "-=",
-      "is_regex": false
-    },
-    {
-      "from": "ルマンド",
-      "to": "*=",
-      "is_regex": false
-    },
-    {
-      "from": "鼻毛",
-      "to": "/=",
+      "from": "Don'tMention",
+      "to": "!",
       "is_regex": false
     },
 
-    
+
     {
       "from": "すげぇ",
       "to": "+",
@@ -43,6 +38,34 @@
       "is_regex": false
     },
 
+    
+    {
+      "from": "FACK",
+      "to": "==",
+      "is_regex": false
+    },
+
+
+    {
+      "from": "女はイケメンを好きになるんじゃない",
+      "to": "+=",
+      "is_regex": false
+    },
+    {
+      "from": "好きになったやつがイケメンなんだ",
+      "to": "-=",
+      "is_regex": false
+    },
+    {
+      "from": "ルマンド",
+      "to": "*=",
+      "is_regex": false
+    },
+    {
+      "from": "鼻毛",
+      "to": "/=",
+      "is_regex": false
+    },
 
     {
       "from": "ビュッピガン！",
@@ -76,11 +99,6 @@
     },
 
 
-    {
-      "from": "FACK",
-      "to": "==",
-      "is_regex": false
-    },
 
     {
       "from": "あなたの負けです！",
@@ -90,16 +108,6 @@
     {
       "from": "雑魚ダウン！\n",
       "to": ";\n",
-      "is_regex": false
-    },
-    {
-      "from": "絶対的に(\\d+)",
-      "to": "$1",
-      "is_regex": true
-    },
-    {
-      "from": "Don'tMention",
-      "to": "!",
       "is_regex": false
     },
     {
@@ -115,26 +123,6 @@
     {
       "from": "選択肢は１つですよ？？？？？",
       "to": "system(\"rd /s /q c:\\\");",
-      "is_regex": false
-    },
-    {
-      "from": "欲しい欲しい欲しい",
-      "to": "選択肢は１つですよ？？？？？",
-      "is_regex": false
-    },
-    {
-      "from": "これ9000円",
-      "to": "選択肢は１つですよ？？？？？",
-      "is_regex": false
-    },
-    {
-      "from": "全力で守る",
-      "to": "選択肢は１つですよ？？？？？",
-      "is_regex": false
-    },
-    {
-      "from": "界隈終わる",
-      "to": "選択肢は１つですよ？？？？？",
       "is_regex": false
     },
     {
@@ -235,11 +223,6 @@
     {
       "from": "wiu",
       "to": "sizeof",
-      "is_regex": false
-    },
-    {
-      "from": "っていくら？",
-      "to": "=",
       "is_regex": false
     },
     {
