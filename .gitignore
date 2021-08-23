@@ -1,2 +1,3 @@
 /main*
-/output.txt
+/output/*
+!/output/.git*
