@@ -1,5 +1,5 @@
 #!/bin/sh
 
-node convert
+node convert reverse
 gcc main.cpp -o main
-./main
+# ./main

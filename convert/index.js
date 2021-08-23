@@ -9,7 +9,7 @@ const table = {
 
   "あなたの負けです！": "return",
   "雑魚ダウン！": ";",
-  "絶対的に": "",
+  "絶対的に(\d+)": "$1",
   "Don'tMention": "!",
   "ahoxa": "printf(\"ahoxa\\n\")",
   "FACK": "==",
@@ -69,12 +69,41 @@ const table = {
   "Client的な（？）": "+0",
   "AMC": 'printf("ActionMoveClient\\n")'
 }
-let src = fs.readFileSync("input.txt").toString();
-for (let conf in table) {
-  src = src.replace(new RegExp(conf, "g"), table[conf]);
-}
 
-// goto script directory
-fs.writeFileSync("main.cpp",
-  fs.readFileSync(__dirname + "/header") + src
-);
+if (process.argv[2] === "reverse") {
+  let src = fs.readFileSync("main.cpp").toString();
+  for (let key in table) {
+    if (key.startsWith("絶対的に")) {
+      src = src.replace(
+        /(\d+)/, "絶対的に$1"
+      );
+      continue;
+    }
+
+    if (key === "チェケラ") {
+      tmp = table[key];
+    }
+    else {
+
+      try {
+        tmp = new RegExp(table[key], "g")
+      } catch (error) {
+        tmp = table[key];
+      }
+    }
+    src = src.replace(
+      tmp, key
+    );
+  }
+
+  src = src.replace("#include <stdio.h>\n", "")
+  fs.writeFileSync("output.txt", src);
+} else {
+  let src = fs.readFileSync("input.txt").toString();
+  for (let conf in table) {
+    src = src.replace(new RegExp(conf, "g"), table[conf]);
+  }
+  fs.writeFileSync("main.cpp",
+    fs.readFileSync(__dirname + "/header") + src
+  );
+}
