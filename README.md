@@ -30,7 +30,7 @@ input/wl.txt にC++ソースを書き込んでコマンドラインで
 $ node convert
 ```
 
-と実行すれば `output/cpp.cpp` に WL が書き込まれます
+と実行すれば `output/cpp.cpp` に C++ が書き込まれます
 
 ### ライブラリとして使う場合
 
