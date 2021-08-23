@@ -32,26 +32,6 @@ $ node convert
 
 と実行すれば `output/cpp.cpp` に C++ が書き込まれます
 
-### ライブラリとして使う場合
-
-#### C++ → WL
-input/cpp.cpp にC++ソースを書き込んでコマンドラインで 
-
-```shell
-$ node convert reverse
-```
-
-と実行すれば `output/wl.txt` に WL が書き込まれます
-
-
-#### WL → C+
-input/wl.txt にC++ソースを書き込んでコマンドラインで 
-
-```shell
-$ node convert
-```
-
-と実行すれば `output/cpp.cpp` に WL が書き込まれます
 
 ---
 
