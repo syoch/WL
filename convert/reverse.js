@@ -2,6 +2,8 @@ const table = require("./table.json")
 
 function reverse(src) {
   for (let key in table) {
+    val = table[key];
+
     if (key.startsWith("絶対的に")) {
       src = src.replace(
         /(\d+)/g, "絶対的に$1"
@@ -10,16 +12,16 @@ function reverse(src) {
     }
 
     if (["チェケラ", "move"].includes(key)) {
-      tmp = table[key];
+      tmp = val;
     } else if (key.length == 1) {
-      tmp = table[key];
+      tmp = val;
     }
     else {
 
       try {
-        tmp = new RegExp(table[key], "g")
+        tmp = new RegExp(val, "g")
       } catch (error) {
-        tmp = table[key];
+        tmp = val;
       }
     }
     src = src.replace(
