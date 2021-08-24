@@ -1,5 +1,3 @@
-const { lst } = require("./table.json")
-
 function reverse(src) {
   for (let p of lst.reverse()) {
     let key = p.from;
@@ -20,5 +18,3 @@ function reverse(src) {
   src = src.replace("#include <stdio.h>\n", "");
   return src;
 }
-
-exports.reverse = reverse
