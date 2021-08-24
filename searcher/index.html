@@ -30,17 +30,12 @@
       let results = [];
 
       for (let key in dict) {
+        const val = dict[key];
         if (key.includes(target)) {
           results.push(key);
-        }
-
-        const val = dict[key];
-
-        if (val[0].includes(target)) {
+        } else if (val[0].includes(target)) {
           results.push(key);
-        }
-
-        if (val[1].includes(target)) {
+        } else if (val[1].includes(target)) {
           results.push(key);
         }
       }
