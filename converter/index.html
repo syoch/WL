@@ -52,13 +52,13 @@
       $("#src").val(reverse($("#dst").val()));
     });
 
-    $.getJSON("convert/table.json", (data) => {
+    $.getJSON("table.json", (data) => {
       window.lst = data.lst;
     })
   </script>
 
-  <script src="convert/reverse.js"></script>
-  <script src="convert/convert.js"></script>
+  <script src="reverse.js"></script>
+  <script src="convert.js"></script>
 </body>
 
 </html>
