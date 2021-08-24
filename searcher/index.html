@@ -68,9 +68,6 @@
     $(() => {
       $.getJSON("database.json", (data) => {
         window.dict = data;
-      }).then(() => {
-        $("#target").val("と");
-        search();
       });
     })
   </script>
