@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>WL Searcher</title>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+</head>
+
+<body>
+  <input type="text" id="target" onchange="search()">
+  <input type="button" value="検索" onclick="search()">
+  <table style="width: 90vw;" border="1">
+    <thead>
+      <th>WL番号</th>
+      <th>起源</th>
+      <th>内容</th>
+    </thead>
+    <tbody id="result">
+    </tbody>
+  </table>
+
+  <script>
+    function search_WL(target) {
+      let results = [];
+
+      for (let key in dict) {
+        if (key.includes(target)) {
+          results.push(key);
+        }
+
+        const val = dict[key];
+
+        if (val[0].includes(target)) {
+          results.push(key);
+        }
+
+        if (val[1].includes(target)) {
+          results.push(key);
+        }
+      }
+
+      return results;
+    }
+    function make_row(key) {
+      let row = $("<tr>");
+      row.append($("<td>").text(key));
+      row.append($("<td>").text(dict[key][0]));
+      row.append($("<td>").text(dict[key][1]));
+      return row;
+    }
+    function search() {
+      var results = search_WL($('#target').val());
+
+      let elem = $("#result");
+      elem.empty();
+
+      for (let key of results) {
+        elem.append(make_row(key));
+      }
+    }
+
+    $(() => {
+      $.getJSON("database.json", (data) => {
+        window.dict = data;
+      }).then(() => {
+        $("#target").val("と");
+        search();
+      });
+    })
+  </script>
+</body>
+
+</html>
