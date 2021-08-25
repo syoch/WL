@@ -51,13 +51,17 @@
 
 
     function fetchDatabase() {
-      return $.getJSON(
-        "/datas/database.json?" + getUnique(),
-        (data) => {
-          window.dict = data.map(
-            x => new WL(x)
-          );
-        });
+      return $.getJSON("/datas/database.json?" + getUnique(), (data) => {
+        window.dict = data.map(
+          x => new WL(x)
+        );
+      });
+    }
+
+    function fetchImageDatabase() {
+      return $.get("/datas/images.txt?" + getUnique(), (data) => {
+        window.images = data.split("\n");
+      });
     }
 
     function init() {
@@ -72,6 +76,7 @@
 
     $(() => {
       fetchDatabase()
+        .then(fetchImageDatabase)
         .then(init)
         .then(() => { });
     })
