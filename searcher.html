@@ -44,7 +44,9 @@
           : fuse.search(target);
 
       for (let wl of matches) {
-        elem.append(wl.toElement());
+        elem.append(wl.toElement(
+          images[wl.wl_id - 1]
+        ));
       }
 
     }
