@@ -14,7 +14,7 @@
 </head>
 
 <body>
-  <input type="text" id="target">
+  <input type="text" id="target" onkeyup="search_handler()">
   <input type="button" value="検索" onclick="search_handler()">
   <table style="width: 90vw;" border="1">
     <thead>
@@ -28,18 +28,14 @@
 
   <script>
     // var fuse = new Fuse(list, options);
-
+    function str_match(a, b) {
+      var fuse = new Fuse(dict);
+    }
     class WL {
       constructor(arr) {
         this.wl_id = arr[0].toString();
         this.author = arr[1].toString();
         this.content = arr[2].toString();
-      }
-
-      match(target) {
-        return this.wl_id.includes(target) |
-          this.author.includes(target) |
-          this.content.includes(target);
       }
 
       toElement() {
@@ -51,31 +47,24 @@
       }
     }
 
-    function search(target) {
-      let results = [];
-
-      for (let wl of dict) {
-        if (wl.match(target)) {
-          results.push(wl);
-        }
-      }
-
-      return results;
-    }
-
 
     function search_handler(target = "") {
       if (target == "") {
         target = $("#target").val();
       }
-      let results = search(target);
 
       let elem = $("#result");
       elem.empty();
 
-      for (let key of results) {
-        elem.append(key.toElement());
+      let matches =
+        target == ""
+          ? dict
+          : fuse.search(target);
+
+      for (let wl of matches) {
+        elem.append(wl.toElement());
       }
+
     }
 
 
@@ -85,8 +74,13 @@
         for (let val of data) {
           window.dict.push(new WL(val));
         }
+
+        window.fuse = new Fuse(window.dict, {
+          keys: ["wl_id", "author", "content"],
+          threshold: 0.6,
+        })
       }).then(() => {
-        search_handler("エンジェルコア");
+        search_handler("uoo");
       });
 
     })
