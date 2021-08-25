@@ -68,10 +68,9 @@
 
     $(() => {
       $.getJSON("database.json?" + Date().toString().replaceAll(/\D/g, ""), (data) => {
-        window.dict = [];
-        for (let val of data) {
-          window.dict.push(new WL(val));
-        }
+        window.dict = data.map(
+          x => new WL(x)
+        );
 
         window.fuse = new Fuse(window.dict, {
           keys: ["wl_id", "author", "content"],
