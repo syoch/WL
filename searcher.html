@@ -67,7 +67,7 @@
 
 
     $(() => {
-      $.getJSON("database.json?" + Date().toString().replaceAll(/\D/g, ""), (data) => {
+      $.getJSON("/datas/database.json?" + Date().toString().replaceAll(/\D/g, ""), (data) => {
         window.dict = data.map(
           x => new WL(x)
         );
