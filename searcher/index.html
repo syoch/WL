@@ -14,8 +14,8 @@
 </head>
 
 <body>
-  <input type="text" id="target" onchange="search()">
-  <input type="button" value="検索" onclick="search()">
+  <input type="text" id="target">
+  <input type="button" value="検索" onclick="search_handler()">
   <table style="width: 90vw;" border="1">
     <thead>
       <th>WL番号</th>
@@ -51,7 +51,7 @@
       }
     }
 
-    function search_WL(target) {
+    function search(target) {
       let results = [];
 
       for (let wl of dict) {
@@ -64,11 +64,11 @@
     }
 
 
-    function search(target = "") {
+    function search_handler(target = "") {
       if (target == "") {
         target = $("#target").val();
       }
-      let results = search_WL(target);
+      let results = search(target);
 
       let elem = $("#result");
       elem.empty();
@@ -86,7 +86,7 @@
           window.dict.push(new WL(val));
         }
       }).then(() => {
-        search("エンジェルコア");
+        search_handler("エンジェルコア");
       });
 
     })
