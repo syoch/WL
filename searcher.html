@@ -26,26 +26,10 @@
     </tbody>
   </table>
 
+  <script src="/scripts/wl.js"></script>
+  <script src="/scripts/utils.js"></script>
+
   <script>
-    // var fuse = new Fuse(list, options);
-
-    class WL {
-      constructor(arr) {
-        this.wl_id = arr[0].toString();
-        this.author = arr[1].toString();
-        this.content = arr[2].toString();
-      }
-
-      toElement() {
-        let row = $("<tr>");
-        row.append($("<td>").text(this.wl_id));
-        row.append($("<td>").text(this.author));
-        row.append($("<td>").text(this.content));
-        return row;
-      }
-    }
-
-
     function search_handler(target = "") {
       if (target == "") {
         target = $("#target").val();
@@ -66,21 +50,32 @@
     }
 
 
+    function fetchDatabase() {
+      return $.getJSON(
+        "/datas/database.json?" + getUnique(),
+        (data) => {
+          window.dict = data.map(
+            x => new WL(x)
+          );
+        });
+    }
+
+    function init() {
+      window.fuse = new Fuse(window.dict, {
+        keys: ["wl_id", "author", "content"],
+        threshold: 0.6,
+      })
+
+      search_handler("");
+    }
+
+
     $(() => {
-      $.getJSON("/datas/database.json?" + Date().toString().replaceAll(/\D/g, ""), (data) => {
-        window.dict = data.map(
-          x => new WL(x)
-        );
-
-        window.fuse = new Fuse(window.dict, {
-          keys: ["wl_id", "author", "content"],
-          threshold: 0.6,
-        })
-      }).then(() => {
-        search_handler("");
-      });
-
+      fetchDatabase()
+        .then(init)
+        .then(() => { });
     })
+
   </script>
 </body>
 
