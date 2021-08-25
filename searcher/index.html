@@ -9,6 +9,7 @@
   <title>WL Searcher</title>
 
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.3.1/fuse.min.js"></script>
 
 </head>
 
@@ -26,44 +27,68 @@
   </table>
 
   <script>
+    // var fuse = new Fuse(list, options);
+
+    class WL {
+      constructor(arr) {
+        this.wl_id = arr[0].toString();
+        this.author = arr[1].toString();
+        this.content = arr[2].toString();
+      }
+
+      match(target) {
+        return this.wl_id.includes(target) |
+          this.author.includes(target) |
+          this.content.includes(target);
+      }
+
+      toElement() {
+        let row = $("<tr>");
+        row.append($("<td>").text(this.wl_id));
+        row.append($("<td>").text(this.author));
+        row.append($("<td>").text(this.content));
+        return row;
+      }
+    }
+
     function search_WL(target) {
       let results = [];
 
-      for (let key in dict) {
-        const val = dict[key];
-        if (key.includes(target)) {
-          results.push(key);
-        } else if (val[0].includes(target)) {
-          results.push(key);
-        } else if (val[1].includes(target)) {
-          results.push(key);
+      for (let wl of dict) {
+        if (wl.match(target)) {
+          results.push(wl);
         }
       }
 
       return results;
     }
-    function make_row(key) {
-      let row = $("<tr>");
-      row.append($("<td>").text(key));
-      row.append($("<td>").text(dict[key][0]));
-      row.append($("<td>").text(dict[key][1]));
-      return row;
-    }
-    function search() {
-      var results = search_WL($('#target').val());
+
+
+    function search(target = "") {
+      if (target == "") {
+        target = $("#target").val();
+      }
+      let results = search_WL(target);
 
       let elem = $("#result");
       elem.empty();
 
       for (let key of results) {
-        elem.append(make_row(key));
+        elem.append(key.toElement());
       }
     }
 
+
     $(() => {
       $.getJSON("database.json?" + Date().toString().replaceAll(/\D/g, ""), (data) => {
-        window.dict = data;
+        window.dict = [];
+        for (let val of data) {
+          window.dict.push(new WL(val));
+        }
+      }).then(() => {
+        search("エンジェルコア");
       });
+
     })
   </script>
 </body>
