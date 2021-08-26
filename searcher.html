@@ -53,7 +53,7 @@
 
 
     function fetchDatabase() {
-      return $.getJSON("/datas/database.json?" + getUnique(), (data) => {
+      return $.getJSON("datas/database.json?" + getUnique(), (data) => {
         window.dict = data.map(
           x => new WL(x)
         );
@@ -61,7 +61,7 @@
     }
 
     function fetchImageDatabase() {
-      return $.get("/datas/images.txt?" + getUnique(), (data) => {
+      return $.get("datas/images.txt?" + getUnique(), (data) => {
         window.images = data.split("\n");
       });
     }
