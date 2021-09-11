@@ -5,111 +5,44 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>WL Searcher 1.0.0</title>
-
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.3.1/fuse.min.js"></script>
-
+  <title>WL Searcher v0.0.0</title>
 </head>
 
 <body>
-  <input type="text" id="target" onkeyup="search_handler()">
-  <input type="button" value="検索" onclick="search_handler()">
-  <input type="checkbox" id="only_dendou" onchange="search_handler()"><span>殿堂入りしたものだけを表示</span>
-  <table style="width: 90vw;" border="1">
-    <thead>
-      <th>WL番号</th>
-      <th>起源</th>
-      <th>内容</th>
-    </thead>
-    <tbody id="result">
-    </tbody>
-  </table>
-
-  <script src="scripts/wl.js"></script>
-  <script src="scripts/utils.js"></script>
+  <h1>SECURITY ALERT</h1>
+  <h2>A Computer Virus Has Detected In Your PC.</h2>
+  <h2>Getting Details For The Virus...</h2>
+  <br>
+  <h1 id="mes"></h1>
+  <div id="a"></div>
 
   <script>
-    function search_handler(target = "") {
-      if (target == "") {
-        target = $("#target").val();
-      }
-
-      let is_dendou_only = $("#only_dendou").prop("checked");
-
-      let elem = $("#result");
-      elem.empty();
-
-      let matches =
-        target == ""
-          ? dict
-          : fuse.search(target);
-
-      for (let wl of matches) {
-        if (is_dendou_only && !wl.is_dendou) {
-          continue;
-        }
-        elem.append(wl.toElement(
-          is_dendou_only
-            ? wl.dendou_image
-            : wl.normal_image
-        ));
-      }
-
+    window.onload = function () {
+      var mes = document.getElementById("mes");
+      let state = 0;
+      let p = setInterval(function () {
+        let c = "Virus: Hijacked Your PC Administrators Account"[state];
+        mes.innerHTML += c;
+        console.log(c)
+        state += 1;
+        if (state >= 46) clearInterval(p);
+      }, 10);
+      var a = document.getElementById("a");
+      setInterval(() => {
+        a.innerHTML += String.fromCharCode(Math.floor(Math.random() * 0x10ff00));
+      }, 0);
     }
-
-    function getJSON(url) {
-      return new Promise((resolve, reject) => {
-        $.getJSON(url + "?" + getUnique()).done(resolve).fail(reject);
-      })
-    }
-
-    function get(url) {
-      return new Promise((resolve, reject) => {
-        $.get(url + "?" + getUnique()).done(resolve).fail(reject);
-      })
-    }
-
-    async function fetchDatabase() {
-      let _images = await get("datas/images.txt");
-      let images = _images.split("\n");
-
-      let database = await getJSON("datas/database.json");
-
-      let dendou = await getJSON("datas/dendou.json");
-
-      window.dict = database.map(x => {
-        let obj = new WL();
-        obj.wl_id = x[0];
-        obj.author = x[1];
-        obj.content = x[2];
-
-        obj.is_dendou = Object.keys(dendou).includes(obj.wl_id);
-        obj.dendou_image = dendou[obj.wl_id];
-        obj.normal_image = images[obj.wl_id - 1];
-
-        return obj;
-      })
-    }
-
-    function init() {
-      window.fuse = new Fuse(window.dict, {
-        keys: ["wl_id", "author", "content"],
-        threshold: 0.6,
-      })
-
-      search_handler("");
-    }
-
-
-    $(() => {
-      fetchDatabase()
-        .then(init)
-        .then(() => { });
-    })
-
   </script>
+
+  <style>
+    body {
+      background-color: red;
+    }
+
+    h3 {
+      font-size: 25px;
+    }
+  </style>
 </body>
 
 </html>
