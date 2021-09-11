@@ -1,8 +1,12 @@
 class WL {
-  constructor(arr) {
-    this.wl_id = arr[0].toString();
-    this.author = arr[1].toString();
-    this.content = arr[2].toString();
+  constructor() {
+    this.wl_id = "";
+    this.author = "";
+    this.content = "";
+
+    this.is_dendou = false;
+    this.dendou_image = "";
+    this.normal_image = "";
   }
 
   toElement(lnk) {
