@@ -65,9 +65,10 @@
         window.images = data.split("\n");
       });
     }
-    function fetchLegendDatabase() {
-      return $.getJSON("datas/legends.json?" + getUnique(), (data) => {
-        window.legends = data;
+
+    function fetchDendouDatabase() {
+      return $.getJSON("datas/dendou.json?" + getUnique(), (data) => {
+        window.dendou = data;
       });
     }
 
@@ -84,7 +85,7 @@
     $(() => {
       fetchDatabase()
         .then(fetchImageDatabase)
-        .then(fetchLegendDatabase)
+        .then(fetchDendouDatabase)
         .then(init)
         .then(() => { });
     })
