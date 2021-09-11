@@ -68,8 +68,7 @@
       let _images = await get("datas/images.txt");
       let images = _images.split("\n");
 
-      let _database = await getJSON("datas/database.json");
-      let database = _database.map(x => new WL(x));
+      let database = await getJSON("datas/database.json");
 
       let dendou = await getJSON("datas/dendou.json");
 
@@ -82,6 +81,8 @@
         obj.is_dendou = Object.keys(dendou).includes(obj.wl_id);
         obj.dendou_image = dendou[obj.wl_id];
         obj.normal_image = images[obj.wl_id - 1];
+
+        return obj;
       })
     }
 
