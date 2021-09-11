@@ -36,6 +36,8 @@
         target = $("#target").val();
       }
 
+      let is_dendou_only = $("#only_dendou").prop("checked");
+
       let elem = $("#result");
       elem.empty();
 
@@ -45,8 +47,13 @@
           : fuse.search(target);
 
       for (let wl of matches) {
+        if (is_dendou_only && !wl.is_dendou) {
+          continue;
+        }
         elem.append(wl.toElement(
-          images[wl.wl_id - 1]
+          is_dendou_only
+            ? wl.dendou_image
+            : wl.normal_image
         ));
       }
 
