@@ -65,6 +65,11 @@
         window.images = data.split("\n");
       });
     }
+    function fetchLegendDatabase() {
+      return $.getJSON("datas/legends.json?" + getUnique(), (data) => {
+        window.legends = data;
+      });
+    }
 
     function init() {
       window.fuse = new Fuse(window.dict, {
@@ -79,6 +84,7 @@
     $(() => {
       fetchDatabase()
         .then(fetchImageDatabase)
+        .then(fetchLegendDatabase)
         .then(init)
         .then(() => { });
     })
