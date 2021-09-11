@@ -72,12 +72,12 @@
     }
 
     async function fetchDatabase() {
-      let _images = await get("datas/images.txt");
+      let _images = await get("../datas/images.txt");
       let images = _images.split("\n");
 
-      let database = await getJSON("datas/database.json");
+      let database = await getJSON("../datas/database.json");
 
-      let dendou = await getJSON("datas/dendou.json");
+      let dendou = await getJSON("../datas/dendou.json");
 
       window.dict = database.map(x => {
         let obj = new WL();
