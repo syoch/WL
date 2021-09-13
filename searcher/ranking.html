@@ -18,7 +18,6 @@
     <thead>
       <th>起源</th>
       <th>個数</th>
-      <th>内容</th>
     </thead>
     <tbody id="result">
     </tbody>
@@ -62,9 +61,13 @@
 
     function make_row(author, count, indexes) {
       let row = $("<tr>");
-      row.append($("<td>").text(author));
+
+      let link = $("<a>")
+        .attr("href", "searcher.html?q=" + author)
+        .text(author);
+
+      row.append($("<td>").append(link));
       row.append($("<td>").text(count));
-      row.append($("<td>").text(indexes));
       return row;
     }
 
