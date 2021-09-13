@@ -67,7 +67,9 @@
         threshold: 0.6,
       })
 
-      $("#target").val(location.search.match(/\?q=(.*)/)[1]);
+      let query = location.search.match(/\?q=(.*)/)[1];
+      $("#target").val(decodeURIComponent(query));
+
       search_handler();
     }
 
