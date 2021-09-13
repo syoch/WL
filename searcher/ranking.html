@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>WL Searcher 1.0.0</title>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.3.1/fuse.min.js"></script>
+
+</head>
+
+<body>
+  <table style="width: 90vw;" border="1">
+    <thead>
+      <th>起源</th>
+      <th>個数</th>
+    </thead>
+    <tbody id="result">
+    </tbody>
+  </table>
+
+  <script src="../scripts/wl.js"></script>
+  <script src="../scripts/utils.js"></script>
+  <script src="../scripts/net.js"></script>
+  <script src="../datas/database.js"></script>
+
+  <script>
+    async function count_WL() {
+      let table = {};
+      for (let key of Object.keys(dict)) {
+        let author = dict[key].author;
+
+        if (!table.hasOwnProperty(author)) {
+          table[author] = [];
+        }
+        table[author].push(key);
+        await null;
+      }
+      return table;
+    }
+
+    async function to_array(table) {
+      let ret = [];
+      for (let key in table) {
+        ret.push([key, table[key]]);
+      }
+      return ret;
+    }
+
+    async function sort(array) {
+      return array.sort((a, b) => {
+        if (a[1].length > b[1].length) return -1;
+        if (a[1].length < b[1].length) return 1;
+        return 0;
+      });
+    }
+
+    function make_row(author, count, indexes) {
+      let row = $("<tr>");
+
+      let link = $("<a>")
+        .attr("href", "searcher.html?q=" + author)
+        .text(author);
+
+      row.append($("<td>").append(link));
+      row.append($("<td>").text(count));
+      return row;
+    }
+
+    async function show(table) {
+      for (let lst of table) {
+        let author = lst[0];
+        let WLs = lst[1];
+        $("#result").append(make_row(
+          author, WLs.length, WLs
+        ));
+      }
+    }
+
+    $(() => {
+      fetchDatabase()
+        .then(count_WL)
+        .then(to_array)
+        .then(sort)
+        .then(show)
+        .then(() => { });
+    })
+  </script>
+</body>
+
+</html>
