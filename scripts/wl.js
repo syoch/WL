@@ -9,7 +9,7 @@ class WL {
     this.normal_image = "";
   }
 
-  toElement(lnk) {
+  toElement(lnk, author_handler = () => { }) {
     let row = $("<tr>");
 
     let id = $("<td>");
@@ -19,10 +19,18 @@ class WL {
         text: this.wl_id
       })
     );
-
+    
+    let author = $("<td>");
+    author.append(
+      $("<a>", {
+        href: `javascript:`,
+        text: this.author
+      })
+    );
+    author.click(author_handler);
 
     row.append(id);
-    row.append($("<td>").text(this.author));
+    row.append(author);
     row.append($("<td>").text(this.content));
     return row;
   }
