@@ -9,16 +9,22 @@
 </head>
 
 <body>
-  <h1>SECURITY ALERT</h1>
-  <h2>A Computer Virus Has Detected In Your PC.</h2>
-  <h2 id="b">Getting Details For The Virus...</h2>
-  <br>
-  <h1 id="mes"></h1>
-  <div id="a"></div>
-
+  <div id=joaif>
+    <h1 id="c">SECURITY ALERT</h1>
+    <h2 id="d">A Computer Virus Has Detected In Your PC.</h2>
+    <h2 id="b">Getting Details For The Virus...</h2>
+    <br>
+    <h1 id="mes"></h1>
+    <div id="a"></div>
+  </div>
   <script>
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
     window.onload = function () {
       var mes = document.getElementById("mes");
+      var a = document.getElementById("a");
+
       let state = 0;
       let p = setInterval(function () {
         let c = "Virus: Hijacked Your PC Administrators Account"[state];
@@ -27,21 +33,36 @@
         state += 1;
         if (state >= 46) clearInterval(p);
       }, 10);
-      var a = document.getElementById("a");
+
       setInterval(() => {
         let val = Math.random() * 0x10ff00;
+
         a.innerHTML += String.fromCharCode(Math.floor(val));
       }, 0);
-
-      setTimeout(() => {
-        document.getElementById("b").innerText += "Failed";
-      }, 1000);
-
       setTimeout(() => {
         setInterval(() => {
-          document.body.innerHTML = document.body.innerHTML.substr(1)
-        }, 1);
-      }, 5000);
+          a.innerText = a.innerText.substr(1)
+        }, 4);
+      }, 1000)
+
+      sleep(1500).then(() => {
+        document.getElementById("d").innerHTML += "Failed";
+      }).then(() => sleep(250)).then(() => {
+        document.getElementById("d").innerHTML = "Virus: Hijacked Your PC Administrators Account";
+      }).then(() => sleep(250)).then(() => {
+        document.getElementById("d").remove();
+        document.getElementById("c").innerHTML = "Virus: Hijacked Your PC Administrators Account";
+      }).then(() => sleep(250)).then(() => {
+        document.getElementById("c").remove();
+        document.getElementById("b").innerHTML = "Virus: Hijacked Your PC Administrators Account";
+      }).then(() => sleep(250)).then(() => {
+        document.getElementById("b").remove();
+        document.getElementById("mes").innerHTML = "Virus: Hijacked Your PC Administrators Account";
+      }).then(() => sleep(250)).then(() => {
+        document.getElementById("mes").remove();
+      })
+
+
     }
   </script>
 
