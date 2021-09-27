@@ -33,6 +33,12 @@
   <script src="../datas/database.js"></script>
 
   <script>
+    function author_handler(wl) {
+      let author_name = wl.author;
+      $("#target").val(decodeURIComponent(author_name));
+      search_handler();
+    }
+
     function search_handler(target = "") {
       if (target == "") {
         target = $("#target").val();
@@ -55,7 +61,8 @@
         elem.append(wl.toElement(
           is_dendou_only
             ? wl.dendou_image
-            : wl.normal_image
+            : wl.normal_image,
+          author_handler
         ));
       }
 
@@ -66,7 +73,7 @@
         keys: ["wl_id", "author", "content"],
         threshold: 0.6,
       })
-      
+
       if (location.search) {
         let query = location.search.match(/\?q=(.*)/)[1];
         $("#target").val(decodeURIComponent(query));
