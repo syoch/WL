@@ -5,13 +5,13 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WL Searcher v0.0.0</title>
+  <title>WL Searcher v0.0.-1</title>
 </head>
 
 <body>
   <h1>SECURITY ALERT</h1>
   <h2>A Computer Virus Has Detected In Your PC.</h2>
-  <h2>Getting Details For The Virus...</h2>
+  <h2 id="b">Getting Details For The Virus...</h2>
   <br>
   <h1 id="mes"></h1>
   <div id="a"></div>
@@ -29,8 +29,19 @@
       }, 10);
       var a = document.getElementById("a");
       setInterval(() => {
-        a.innerHTML += String.fromCharCode(Math.floor(Math.random() * 0x10ff00));
+        let val = Math.random() * 0x10ff00;
+        a.innerHTML += String.fromCharCode(Math.floor(val));
       }, 0);
+
+      setTimeout(() => {
+        document.getElementById("b").innerText += "Failed";
+      }, 1000);
+
+      setTimeout(() => {
+        setInterval(() => {
+          document.body.innerHTML = document.body.innerHTML.substr(1)
+        }, 1);
+      }, 5000);
     }
   </script>
 
