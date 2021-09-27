@@ -27,7 +27,7 @@ class WL {
         text: this.author
       })
     );
-    author.click(author_handler);
+    author.click(()=>{author_handler(this)});
 
     row.append(id);
     row.append(author);
